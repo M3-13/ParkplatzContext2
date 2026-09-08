@@ -1,0 +1,14 @@
+{
+  "runcontract": 1,
+  "services": [
+    {
+      "name": "parkplatz",
+      "dir": "src-tauri",
+      "stack": "rust",
+      "kind": "worker",
+      "install": [["cargo", "build"]],
+      "build": [["cargo", "build", "--release"]],
+      "start": ["cargo", "run"]
+    }
+  ]
+}
