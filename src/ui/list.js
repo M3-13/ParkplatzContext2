@@ -153,19 +153,32 @@
     searchRow.appendChild(searchInput);
     container.appendChild(searchRow);
 
+    const notice = el('div', 'note-list-notice');
     const listRoot = el('div', 'note-list-items');
+    container.appendChild(notice);
     container.appendChild(listRoot);
 
     root.replaceChildren(container);
 
     let currentSearch = '';
 
+    // Show a transient, user-readable message. Rendered as text only (AC-13).
+    function showNotice(message) {
+      setText(notice, message);
+    }
+
+    function clearNotice() {
+      setText(notice, '');
+    }
+
     async function load() {
       try {
         const notes = await invoke('list_notes', { search: currentSearch });
         const sorted = (notes || []).slice().sort((a, b) => (b.created_at || 0) - (a.created_at || 0));
+        clearNotice();
         renderList(listRoot, invoke, sorted, onToggle, onDelete);
       } catch (err) {
+        showNotice('Zettel konnten nicht geladen werden.');
         listRoot.replaceChildren(
           el('div', 'note-list-error', 'Zettel konnten nicht geladen werden.'),
         );
@@ -177,7 +190,7 @@
         await invoke('toggle_note_done', { id: note.id, done: !note.done });
         await load();
       } catch (err) {
-        // Keep the previous list; nothing to render as text from a raw error.
+        showNotice('Der Zettel konnte nicht geändert werden.');
       }
     }
 
@@ -186,7 +199,7 @@
         await invoke('delete_note', { id: note.id });
         await load();
       } catch (err) {
-        // Keep the previous list.
+        showNotice('Der Zettel konnte nicht gelöscht werden.');
       }
     }
 
