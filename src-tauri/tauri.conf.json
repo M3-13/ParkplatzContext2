@@ -4,12 +4,10 @@
   "version": "0.1.0",
   "identifier": "dev.parkplatz.app",
   "build": {
-    "beforeDevCommand": "",
-    "devUrl": "",
-    "beforeBuildCommand": "",
     "frontendDist": "../src"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "label": "main",

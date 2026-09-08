@@ -23,7 +23,10 @@ chrono = "0.4"
 notify = "6"
 
 [features]
-# This application is a desktop tray utility and must never initiate network
-# connections. The default Tauri devtools feature is intentionally disabled.
+# This feature is used for production builds or when a dev server is not
+# specified. DO NOT REMOVE! It enables the custom protocol that serves the
+# embedded frontend assets. It is enabled by default so that the app starts
+# with plain `cargo run --manifest-path src-tauri/Cargo.toml` (no dev server,
+# no environment variables) exactly as RUN.json declares.
 default = ["custom-protocol"]
 custom-protocol = ["tauri/custom-protocol"]

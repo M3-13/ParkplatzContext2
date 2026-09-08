@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parkplatz</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Parkplatz</h1>
+      <p class="subtitle">Kontext-Merker für Entwickler</p>
+    </header>
+
+    <!-- Hidden input field, revealed by the global hotkey -->
+    <section id="park-panel" class="park-panel" hidden>
+      <input
+        id="note-input"
+        type="text"
+        placeholder="Zettel parken – Enter zum Speichern"
+        autocomplete="off"
+      />
+    </section>
+
+    <section class="recent-panel">
+      <h2>Zuletzt geparkt</h2>
+      <p id="recent-note" class="recent-note">–</p>
+    </section>
+
+    <section class="list-panel">
+      <div class="list-toolbar">
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Suchen…"
+          autocomplete="off"
+        />
+        <button id="export-button" type="button">Exportieren</button>
+      </div>
+      <ul id="notes-list" class="notes-list"></ul>
+      <p id="empty-state" class="empty-state">Noch keine Zettel geparkt.</p>
+    </section>
+
+    <p id="status" class="status" hidden></p>
+
+    <script src="ui/list.js"></script>
+    <script src="ui/park.js"></script>
+    <script src="ui/export.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
